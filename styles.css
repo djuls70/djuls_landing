@@ -1,0 +1,132 @@
+:root {
+  --industrial-time: 160ms;
+  --industrial-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background-color: #FAFAFA;
+  background-image: radial-gradient(#E4E4E7 1.25px, transparent 1.25px);
+  background-size: 24px 24px;
+  color: #09090B;
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-tech {
+  font-family: 'JetBrains Mono', monospace;
+  font-feature-settings: "zero" 1;
+}
+
+/* Пульсирующий сонар активности ядра */
+@keyframes beaconRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.45); }
+  50% { box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15); }
+}
+.beacon-active {
+  animation: beaconRing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Кастомный нейтральный скроллбар */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #FAFAFA; }
+::-webkit-scrollbar-thumb { background: #E4E4E7; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
+
+/* Прецизионный ховер карточек с субпиксельной защитой */
+.node-card {
+  transition: transform var(--industrial-time) var(--industrial-ease),
+              border-color var(--industrial-time) var(--industrial-ease),
+              box-shadow var(--industrial-time) var(--industrial-ease),
+              background-color var(--industrial-time) var(--industrial-ease);
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: subpixel-antialiased;
+  backface-visibility: hidden;
+  cursor: pointer;
+}
+.node-card:hover {
+  transform: translate3d(0, -1px, 0);
+  border-color: #FB923C;
+  box-shadow: 0 4px 14px -1px rgba(234, 88, 12, 0.12);
+}
+.node-card:hover .node-dot {
+  background-color: #EA580C;
+}
+
+/* Ступенчатый каскадный монтаж карточек стенда */
+@keyframes cardMount {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.card-mount {
+  animation: cardMount 140ms var(--industrial-ease) backwards;
+}
+
+/* Центральное вычислительное ядро */
+.ai-core-beam {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5px;
+  border-radius: 0.75rem;
+  background: #E4E4E7;
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: subpixel-antialiased;
+  backface-visibility: hidden;
+  cursor: pointer;
+  transition: transform var(--industrial-time) var(--industrial-ease),
+              border-color var(--industrial-time) var(--industrial-ease),
+              box-shadow var(--industrial-time) var(--industrial-ease),
+              background-color var(--industrial-time) var(--industrial-ease);
+}
+.ai-core-beam:hover {
+  transform: translate3d(0, -1px, 0);
+  background-color: #FB923C;
+  box-shadow: 0 4px 14px -1px rgba(234, 88, 12, 0.14);
+}
+.ai-core-beam::before {
+  content: '';
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 240deg, #EA580C 315deg, transparent 360deg);
+  animation: rotateBorderBeam 3.5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.ai-core-inner {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: calc(0.75rem - 1.5px);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+@keyframes rotateBorderBeam {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Единый тактильный отклик интерактивных элементов */
+.btn-tactile {
+  transition: transform 100ms var(--industrial-ease),
+              background-color var(--industrial-time) var(--industrial-ease),
+              border-color var(--industrial-time) var(--industrial-ease),
+              box-shadow var(--industrial-time) var(--industrial-ease);
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-tactile:hover {
+  transform: translate3d(0, -1px, 0);
+  box-shadow: 0 4px 12px -2px rgba(9, 9, 11, 0.08);
+}
+.btn-tactile:active {
+  transform: scale(0.985);
+}
+
+/* Скрытие полосы прокрутки для мобильной свайп-карусели */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
